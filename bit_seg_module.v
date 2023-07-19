@@ -9,10 +9,10 @@ module bit_seg_module(
     input                  en          ,     //数码管使能信号                                                             
     output  reg  [7:0]     bit         ,     //数码管位选信号(东南西北亮起的模块)
     output  reg  [7:0]     segment     ,      //数码管段选信号（数码管中的小横线亮与否）,包含小数点
-	output  reg   [3:0]     num_n_0	   ,
-	output  reg   [3:0]     num_n_1	   ,
-	output  reg   [3:0]     num_w_0	   ,
-	output  reg   [3:0]     num_w_1	   
+	output  reg   [3:0]     num_n_0	   , //北方向数码管的十位
+	output  reg   [3:0]     num_n_1	   , //北方向数码管的个位
+	output  reg   [3:0]     num_w_0	   , //西方向数码管的十位
+	output  reg   [3:0]     num_w_1	     //西方向数码管的个位
 );
 //parameter define
 parameter  state_count = 50;              //计数0.0001ms的计数深度
@@ -73,12 +73,12 @@ always @ (posedge sys_clk or negedge sys_rst_n) begin
             3'd0 : begin     
                 bit <= 8'b11111110;              //驱动北方向数码管的十位  
                 num <= data_n_0;
-				num_n_0 <= data_n_0;
+		num_n_0 <= data_n_0;
             end       
             3'd1 : begin     
                 bit <= 8'b11111101;              //驱动北方向数码管的个位
                 num <= data_n_1;
-				num_n_1 <= data_n_1;
+		num_n_1 <= data_n_1;
             end 
             3'd2 : begin 
                 bit <= 8'b11111011;              //驱动东方向数码管的十位
@@ -88,7 +88,7 @@ always @ (posedge sys_clk or negedge sys_rst_n) begin
             3'd3 : begin 
                 bit <= 8'b11110111;              //驱动东方向数码管的个位
                 num  <= data_e_1 ;
-				num_w_1 <= data_w_1;    
+		num_w_1 <= data_w_1;    
             end
 			3'd4 : begin     
                 bit <= 8'b11101111;              //驱动南方向数码管的十位  
