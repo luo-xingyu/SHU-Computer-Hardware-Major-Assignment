@@ -30,6 +30,7 @@
   - sys_rst_n为0时，为遇到紧急情况进入【红灯模式】，倒计时停止，Key值输入无效，此时交通灯变为全红灯，不受其他输入信号干扰
 - 如需要修改倒计时时间，可直接修改state_trans_model.v中的parameter define
 - 连接硬件时请选择100kHZ的时钟频率
+- 因为实验箱一共就六个数码管，最终只使用4个数码管表示北和西的倒计时
 - bit_seg_module.v 中的bit和segment是没有用的，因为实验箱可以直接接数码管，只用关心num_n_0,num_n_1,num_w_0,num_w_1即可
 # 参考资料
 本项目基于YANthinkn的SHU-Computer-Hardware-Major-Assignment，略加修改以满足课程要求，感谢其共享！
